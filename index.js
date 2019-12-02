@@ -1,3 +1,5 @@
+const https = require('https');
+
 const parseOptions = require('./options').parseOptions;
 const uuidv1 = require('uuid/v1');
 const delay = require('delay');
@@ -61,8 +63,15 @@ async function loop(tableName, numberOfSeconds, pressure) {
 
 (async () => {
     const options = parseOptions();
+    const agent = new https.Agent({
+      keepAlive: true,
+      maxSockets: 150,
+      rejectUnauthorized: true
+    });
+
     AWS.config.update({
       region : options.region,
+      httpOptions : { agent },
       retryDelayOptions: {
         customBackoff: function(retryCount) {
           console.log(`Exponential backoff triggered.`);

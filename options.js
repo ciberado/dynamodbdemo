@@ -1,7 +1,7 @@
 const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
 
-const MAX_PRESSURE = 5000;
+const MAX_PRESSURE = 25000;
 
 function parseOptions() {
   const sections = [
