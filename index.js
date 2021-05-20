@@ -5,8 +5,7 @@ const uuidv1 = require('uuid/v1');
 const delay = require('delay');
 const AWS = require('aws-sdk');
 
-const getRandomPokemon = require('./pokemondb').getRandomPokemon;
-
+const getRandomEntity = require('./db').getRandomEntity;
 
 let docClient;
 
@@ -23,7 +22,7 @@ async function writeBatch(tableName, numberOfItems) {
       const item = {
         uuid : uuidv1(),
         timestamp : Date.now() + Math.random(),
-        pokemon : getRandomPokemon(),
+        entity : getRandomEntity(),
         latLon  : getRandomLatLon()
       };
       const aPutRequest = {
