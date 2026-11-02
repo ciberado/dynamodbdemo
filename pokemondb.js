@@ -726,9 +726,6 @@ function getRandomIndex() {
   return parseInt(Math.random() * pokemonDatabase.length);
 }    
 
-module.exports = {
-    getRandomPokemon() {
-        return pokemonDatabase[getRandomIndex()];
-    }
-
-};
+export function getRandomPokemon() {
+    return pokemonDatabase[getRandomIndex()];
+}

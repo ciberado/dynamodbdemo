@@ -1,9 +1,9 @@
-const commandLineUsage = require('command-line-usage');
-const commandLineArgs = require('command-line-args');
+import commandLineUsage from 'command-line-usage';
+import commandLineArgs from 'command-line-args';
 
 const MAX_PRESSURE = 25000;
 
-function parseOptions() {
+export function parseOptions() {
   const sections = [
     {
       header : 'Dynapok',
@@ -64,12 +64,15 @@ function parseOptions() {
     process.exit(1);
   }  
 
-  if (options.presure < 1 || options.pressure > MAX_PRESSURE) {
-    console.error(`Pressure must be between 1 and ${MAX_PRESSURE}.`);
+  if (!Number.isInteger(options.seconds) || options.seconds < 1) {
+    console.error('Seconds must be a positive integer.');
+    process.exit(1);
+  }
+
+  if (!Number.isInteger(options.pressure) || options.pressure < 1 || options.pressure > MAX_PRESSURE) {
+    console.error(`Pressure must be an integer between 1 and ${MAX_PRESSURE}.`);
     process.exit(1);
   }
 
   return options;
 }
-
-module.exports.parseOptions = parseOptions;
